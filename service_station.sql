@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.23, for Linux (x86_64)
 --
--- Host: localhost    Database: service_station
+-- Host: 35.187.89.191    Database: service_station
 -- ------------------------------------------------------
--- Server version	5.7.23-0ubuntu0.18.04.1
+-- Server version	5.7.14-google-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,14 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
+SET @@SESSION.SQL_LOG_BIN= 0;
+
+--
+-- GTID state at the beginning of the backup
+--
+
+SET @@GLOBAL.GTID_PURGED='f809246f-9660-11e8-8c28-42010a840056:1-336029';
 
 --
 -- Table structure for table `customers`
@@ -28,7 +36,7 @@ CREATE TABLE `customers` (
   `surname` varchar(255) NOT NULL,
   `birth_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +45,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,'Janek','Kowalski','1970-03-12'),(2,'Maria','Nowak','1980-08-30'),(3,'Marek','Darek','1990-11-07'),(7,'Ryszard','Wesołowski','2018-07-05'),(11,'Rafał','Bojka','1975-07-02');
+INSERT INTO `customers` VALUES (1,'Janek','Kowalski','1970-03-12'),(2,'Maria','Nowak','1980-08-30'),(3,'Marek','Darek','1990-11-07'),(7,'Ryszard','Wesołowski','2018-07-05'),(11,'Rafał','Bojka','1975-07-02'),(12,'Robert','Piwowarczyk',NULL);
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +65,7 @@ CREATE TABLE `employees` (
   `note` text,
   `rate` float(5,2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +105,7 @@ CREATE TABLE `orders` (
   CONSTRAINT `orders_ibfk1` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`),
   CONSTRAINT `orders_ibfk2` FOREIGN KEY (`employees_id`) REFERENCES `employees` (`id`),
   CONSTRAINT `orders_ibfk3` FOREIGN KEY (`vehicles_id`) REFERENCES `vehicles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +114,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (6,'2018-08-01','2018-08-01',NULL,2,'Nie odpala','',3,2,113.22,5.22,2.00),(7,'2018-08-01','2018-08-01',NULL,3,'Dymi na dużych obrotach','',1,3,284.00,210.00,2.00),(9,'2018-08-02','2018-08-02',NULL,3,'Nie odpala','',1,4,38.01,1.01,1.00);
+INSERT INTO `orders` VALUES (6,'2018-08-01','2018-08-01',NULL,3,'Nie odpala','',3,2,116.28,5.28,3.00),(7,'2018-08-01','2018-08-05',NULL,3,'Dymi na dużych obrotach','',1,3,324.00,250.00,2.00),(9,'2018-08-02','2018-08-02',NULL,3,'Nie odpala','',1,4,38.01,1.01,1.00),(10,'2018-08-03','2018-08-07',NULL,3,'Nie odpala','',1,5,157.16,120.16,1.00),(11,'2018-08-03','2018-08-03',NULL,2,'sff',NULL,1,2,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,6 +141,32 @@ LOCK TABLES `status` WRITE;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
 INSERT INTO `status` VALUES (4,'Naprawiony'),(1,'Przyjęty'),(3,'W trakcie naprawy'),(2,'Zakończony');
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'admin','$2a$10$nlg/wEcz8sJV7/IeJWt2D.x52aCfyTY3IWtMb9gkvw3owJen1pFBi');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -163,9 +197,10 @@ CREATE TABLE `vehicles` (
 
 LOCK TABLES `vehicles` WRITE;
 /*!40000 ALTER TABLE `vehicles` DISABLE KEYS */;
-INSERT INTO `vehicles` VALUES (2,'Focus','Ford',2017,'ZXZ0987','2018-11-24',2),(3,'truck','MAN',2011,'DOS456X','2018-07-21',3),(4,'Zafira','Opel',2000,'SK 8765','2018-08-25',3),(5,'Zafira','Opel',2017,'SK876','2018-08-26',11);
+INSERT INTO `vehicles` VALUES (2,'Focus','Ford',2017,'ZXZ0987','2018-11-24',2),(3,'Truck','MAN',2011,'DOS456X','2018-07-21',3),(4,'Zafira','Opel',2000,'SK 8765','2018-08-25',3),(5,'Zafira','Opel',2017,'SK876','2018-08-26',11);
 /*!40000 ALTER TABLE `vehicles` ENABLE KEYS */;
 UNLOCK TABLES;
+SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -176,4 +211,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-02 13:23:18
+-- Dump completed on 2018-08-06 14:28:19
