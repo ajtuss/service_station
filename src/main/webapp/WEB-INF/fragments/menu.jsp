@@ -15,10 +15,10 @@
         <ul class="nav navbar-nav">
             <c:choose>
                 <c:when test="${path == '/'}">
-                    <li class="active"><a href="/">Naprawy</a></li>
+                    <li class="active"><a href="/orders">Naprawy</a></li>
                 </c:when>
                 <c:otherwise>
-                    <li><a href="/">Naprawy</a></li>
+                    <li><a href="/orders">Naprawy</a></li>
                 </c:otherwise>
             </c:choose>
 
