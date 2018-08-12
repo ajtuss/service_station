@@ -27,9 +27,7 @@ public class OrdersRepository extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             List<Order> orders = OrderDAO.loadAll();
-            out.append("{\"orders\":")
-                    .append(mapper.writeValueAsString(orders))
-                    .append("}");
+            out.append(mapper.writeValueAsString(orders));
             out.flush();
         } catch (SQLException e) {
             e.printStackTrace();
