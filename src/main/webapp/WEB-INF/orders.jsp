@@ -10,20 +10,27 @@
 <html>
 <head>
     <title>Service Station</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+
+    <%--jQuery--%>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <%--Bootstrap 3--%>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#ordersTab').DataTable({
-                "paging":   false
-            });
-        } );
-    </script>
+
+    <%--DataTable, buttons, select--%>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.6/css/select.dataTables.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/select/1.2.6/js/dataTables.select.js"></script>
+
+
+    <script src="http://momentjs.com/downloads/moment.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.19/dataRender/datetime.js"></script>
+    <script src="js/ordersScript.js"></script>
 </head>
 <body>
 
@@ -72,23 +79,25 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${orders}" var="order" varStatus="loop">
-            <tr>
-                <td>${loop.count}</td>
-                <td>${order.arrivalDate}</td>
-                <td>${order.plannedRepairDate}</td>
-                <td>${order.realRepairDate}</td>
-                <td>${order.employee.name} ${order.employee.surname}</td>
-                <td>${order.status.name}</td>
-                <td>${order.totalCost}</td>
-                <td>
-                    <a href="/orders/edit?id=${order.id}" role="button" class="btn btn-primary btn-sm m-0 btn-block">Edytuj</a>
-                </td>
-                <td>
-                    <a href="/orders/delete?id=${order.id}" role="button" class="btn btn-primary btn-sm m-0 btn-block">Usuń</a>
-                </td>
-            </tr>
-        </c:forEach>
+        <%--<c:forEach items="${orders}" var="order" varStatus="loop">--%>
+        <%--<tr>--%>
+            <%--<td>${loop.count}</td>--%>
+            <%--<td>${order.arrivalDate}</td>--%>
+            <%--<td>${order.plannedRepairDate}</td>--%>
+            <%--<td>${order.realRepairDate}</td>--%>
+            <%--<td>${order.employee.name} ${order.employee.surname}</td>--%>
+            <%--<td>${order.status.name}</td>--%>
+            <%--<td>${order.totalCost}</td>--%>
+            <%--<td>--%>
+                <%--<a href="/orders/edit?id=${order.id}" role="button"--%>
+                   <%--class="btn btn-primary btn-sm m-0 btn-block">Edytuj</a>--%>
+            <%--</td>--%>
+            <%--<td>--%>
+                <%--<a href="/orders/delete?id=${order.id}" role="button"--%>
+                   <%--class="btn btn-primary btn-sm m-0 btn-block">Usuń</a>--%>
+            <%--</td>--%>
+        <%--</tr>--%>
+        <%--</c:forEach>--%>
         </tbody>
     </table>
 </div>
