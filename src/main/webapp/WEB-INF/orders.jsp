@@ -30,7 +30,7 @@
 
     <script src="http://momentjs.com/downloads/moment.js"></script>
     <script src="https://cdn.datatables.net/plug-ins/1.10.19/dataRender/datetime.js"></script>
-    <script src="js/ordersScript.js"></script>
+    <script src="js/orders.js"></script>
 </head>
 <body>
 
@@ -40,27 +40,14 @@
 
 
     <h2>Aktualne naprawy:</h2>
-    <form class="form-horizontal" action="/" method="get">
+    <form class="form-horizontal" action="/orders" method="get">
         <div class="form-group col-sm-10">
             <label class="control-label col-sm-1" for="employee">Pracownik:</label>
             <div class="col-sm-3">
-                <select class="form-control" id="employee" name="employeeId" onchange="this.form.submit()">
+                <select class="form-control" id="employee" name="employeeId">
                     <option value="">Wybierz pracownika</option>
-                    <c:forEach items="${employees}" var="employee" varStatus="loop">
-                        <c:choose>
-                            <c:when test="${employee.id == employeeId}">
-                                <option value="${employee.id}" selected>${employee.name} ${employee.surname}</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="${employee.id}">${employee.name} ${employee.surname}</option>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
                 </select>
             </div>
-        </div>
-        <div class="col-sm-2">
-            <a href="/orders/add" role="button" class="btn btn-primary btn-sm m-0 btn-block">Dodaj Zlecenie</a>
         </div>
     </form>
     <table id="ordersTab" class="display" style="width:100%">
@@ -73,31 +60,9 @@
             <th>Pracownik</th>
             <th>Status</th>
             <th>Koszt naprawy</th>
-            <th class="col-sm-1">
-            </th>
-            <th class="col-sm-1"></th>
         </tr>
         </thead>
         <tbody>
-        <%--<c:forEach items="${orders}" var="order" varStatus="loop">--%>
-        <%--<tr>--%>
-            <%--<td>${loop.count}</td>--%>
-            <%--<td>${order.arrivalDate}</td>--%>
-            <%--<td>${order.plannedRepairDate}</td>--%>
-            <%--<td>${order.realRepairDate}</td>--%>
-            <%--<td>${order.employee.name} ${order.employee.surname}</td>--%>
-            <%--<td>${order.status.name}</td>--%>
-            <%--<td>${order.totalCost}</td>--%>
-            <%--<td>--%>
-                <%--<a href="/orders/edit?id=${order.id}" role="button"--%>
-                   <%--class="btn btn-primary btn-sm m-0 btn-block">Edytuj</a>--%>
-            <%--</td>--%>
-            <%--<td>--%>
-                <%--<a href="/orders/delete?id=${order.id}" role="button"--%>
-                   <%--class="btn btn-primary btn-sm m-0 btn-block">Usuń</a>--%>
-            <%--</td>--%>
-        <%--</tr>--%>
-        <%--</c:forEach>--%>
         </tbody>
     </table>
 </div>
