@@ -1,0 +1,6 @@
+mysql:
+  image: mysql:5.7.23
+  environment:
+    - MYSQL_ROOT_PASSWORD=coderslab
+  volumes:
+    - ./service_station.sql:/tmp/script.sql

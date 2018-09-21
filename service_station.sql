@@ -23,6 +23,9 @@ SET @@SESSION.SQL_LOG_BIN= 0;
 
 SET @@GLOBAL.GTID_PURGED='f809246f-9660-11e8-8c28-42010a840056:1-336029';
 
+CREATE DATABASE service_station;
+USE service_station;
+
 --
 -- Table structure for table `customers`
 --
