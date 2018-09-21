@@ -1,6 +1,6 @@
 # service_station
 
-CRM App in Java for service station.
+CRM Web-App in Java for service station.
 
 
 ### Technologies used
